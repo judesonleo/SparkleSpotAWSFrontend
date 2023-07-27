@@ -17,16 +17,22 @@ export default function CreatePost() {
     data.set("content", content);
     data.set("file", files[0]);
     ev.preventDefault();
-    const response = await fetch(
-      "https://sparkle-spot-app-aws.onrender.com/post",
-      {
-        method: "POST",
-        body: data,
-        credentials: "include",
+    try {
+      const response = await fetch(
+        "https://sparkle-spot-app-aws.onrender.com/post",
+        {
+          method: "POST",
+          body: data,
+          credentials: "include",
+        }
+      );
+      if (response.ok) {
+        setRedirect(true);
+      } else {
+        console.error("Error creating post:", response.statusText);
       }
-    );
-    if (response.ok) {
-      setRedirect(true);
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
   }
 
