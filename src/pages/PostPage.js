@@ -46,7 +46,10 @@ export default function PostPage() {
         {/* Use the cover image URL directly in the src attribute */}
         <img src={postInfo.cover} alt="" />
       </div>
-      <div className="content">{postInfo.content}</div>
+      <div
+        className="content"
+        dangerouslySetInnerHTML={{ __html: postInfo.content }}
+      />
     </div>
   );
 }
