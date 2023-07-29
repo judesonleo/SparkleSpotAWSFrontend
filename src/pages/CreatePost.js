@@ -49,7 +49,7 @@ export default function CreatePost() {
 
   if (redirect) {
     // Redirect to the newly created post page with its ID
-    return <Navigate to={"/post/:new_post_id"} />;
+    return <Navigate to={"/"} />;
   }
 
   return (
