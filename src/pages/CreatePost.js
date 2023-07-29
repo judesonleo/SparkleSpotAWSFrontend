@@ -8,15 +8,24 @@ export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState([]);
   const [redirect, setRedirect] = useState(false);
+
   async function createNewPost(ev) {
+    ev.preventDefault();
+
+    // Check if a file is selected
+    if (!files[0]) {
+      console.error("Please select a file.");
+      return;
+    }
+
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
     data.set("file", files[0]);
-    ev.preventDefault();
+
     try {
       const response = await fetch(
         "https://sparkle-spot-app-aws.onrender.com/post",
@@ -28,6 +37,7 @@ export default function CreatePost() {
       );
 
       if (response.ok) {
+        // Redirect to the newly created post page instead of the homepage
         setRedirect(true);
       } else {
         console.error("Error creating post:", response.statusText);
@@ -38,19 +48,23 @@ export default function CreatePost() {
   }
 
   if (redirect) {
-    return <Navigate to={"/"} />;
+    // Redirect to the newly created post page with its ID
+    return <Navigate to={"/post/:new_post_id"} />;
   }
+
   return (
     <form onSubmit={createNewPost}>
       <input
-        type="title"
-        placeholder={"Title"}
+        type="text"
+        name="title"
+        placeholder="Title"
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
       />
       <input
-        type="summary"
-        placeholder={"Summary"}
+        type="text"
+        name="summary"
+        placeholder="Summary"
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
