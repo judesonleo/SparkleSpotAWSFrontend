@@ -26,6 +26,7 @@ export default function CreatePost() {
           credentials: "include",
         }
       );
+
       if (response.ok) {
         setRedirect(true);
       } else {

@@ -18,12 +18,12 @@ export default function PostPage() {
       }
     );
   }, []);
-  fetch(
-    "https://sparkle-spot-app-aws.onrender.com/post/64c2c92e0877190911437812"
-  )
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error fetching post:", error));
+  // fetch(
+  //   "https://sparkle-spot-app-aws.onrender.com/post/64c2c92e0877190911437812"
+  // )
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data))
+  //   .catch((error) => console.error("Error fetching post:", error));
 
   if (!postInfo) return "";
 
